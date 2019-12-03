@@ -1,0 +1,60 @@
+<p-panel>
+        <p-header> <span><i class="far fa-users"></i></span> LISTE DES PERMISSIONS</p-header>
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                <div class="row mb-2">
+                    <div class="col-6">
+                        <div class="d-flex">
+                            <div class="ui-inputgroup">
+                                <button pButton type="button" icon="far fa-search" class="ui-button-warning"></button>
+                                <input type="text" pInputText placeholder="Rechercher..."
+                                       pTooltip="Rechercher un employé " (input)="dt.filterGlobal($event.target.value, 'contains')">
+                            </div>  
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex flex-row-reverse">
+                            <p-button [routerLink]="['/createpermission']" icon ="far fa-user-plus" label="Ajouter une permission"></p-button> 
+                        </div>
+                    </div>
+                    
+                </div>
+            <div class="ui-grid">
+              <p-table #dt [value]="permissions$ | async" [resizableColumns]="true" [paginator]="true" [rows]="10" [globalFilterFields]="['employe']">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pResizableColumn>Employé</th>
+                    <th pResizableColumn>Type de permission</th>
+                    <th pResizableColumn>Debut de permission</th>
+                    <th pResizableColumn>Fin de permission</th>
+                    <th pResizableColumn>Actions</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-permission>
+                  <tr>
+                  <tr>
+                    <td class="ui-resizable-column">{{permission.employe}}</td>
+                    <td class="ui-resizable-column">{{permission.typePermission}}</td>
+                    <td class="ui-resizable-column">{{permission.dateDebut | date: 'fullDate'}}</td>
+                    <td class="ui-resizable-column">{{permission.dateFin | date: 'fullDate'}}</td>
+                    <td class="ui-resizable-column">
+                      <div class="d-flex flex-row">
+                        <button class="btn btn-success btn-sm"><span><i class="far fa-eye"></i></span></button>
+                        <div class="d-flex flex-row mx-1">
+                          <button [routerLink]="['/permissions', permission._id, 'edit']" class="btn btn-primary btn-sm"><span><i class="far fa-edit"></i></span></button>
+                        </div>
+                        <button nz-popconfirm
+                                nzPopconfirmTitle="Voulez vraiment supprimer?"
+                                nzPopconfirmPlacement="bottom"
+                                (nzOnConfirm)="confirm(permission._id)"
+                                (nzOnCancel)="cancel()" class="btn btn-sm btn-danger">
+                          <span><i class="far fa-trash"></i></span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+        </div>
+        
+    </p-panel>

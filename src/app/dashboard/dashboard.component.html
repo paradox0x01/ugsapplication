@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+    <div class="col-md-3">
+      <div class="card-counter primary">
+        <i class="fa fa-code-fork"></i>
+        <span class="count-numbers">{{countStaffs}}</span>
+        <span class="count-name">STAFFS</span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter danger">
+        <i class="fa fa-ticket"></i>
+        <span class="count-numbers">{{countGardiens}}</span>
+        <span class="count-name">GARDIENS</span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter success">
+        <i class="fa fa-database"></i>
+        <span class="count-numbers">{{countTimesheet}}</span>
+        <span class="count-name">ABSENTS</span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter info">
+        <i class="fa fa-users"></i>
+        <span class="count-numbers">{{countPermission}}</span>
+        <span class="count-name">PERMISSIONS</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <p-fullCalendar [options]="options" [events]="Event" ></p-fullCalendar>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+

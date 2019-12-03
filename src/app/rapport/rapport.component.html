@@ -1,0 +1,162 @@
+<p-tabView>
+  <p-tabPanel header="Rapport de permissions">
+    <div fxLayout="row" fxLayoutGap="20px" >
+      <div>
+        <p-calendar showIcon="true" [(ngModel)]="startDate" placeholder="Date de début"></p-calendar>
+      </div>
+      <div>
+        <p-calendar showIcon="true" [(ngModel)]="endDate" placeholder="Date de fin"></p-calendar>
+      </div>
+      <div>
+        <p-button icon="far fa-search" (click)="getReportPermission(startDate, endDate)" iconPos="right" label="Rechercher"></p-button>
+      </div>
+    </div>
+    <div style="margin-top: 20px">
+      <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+        <tr>
+          <th>Nombre de permission</th>
+          <th>Date du rapport</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{countPermission}}</td>
+          <td>{{date | date: 'dd-MMM-yyyy'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Rapport de présence">
+    <div fxLayout="row" fxLayoutGap="20px" >
+      <div>
+        <p-calendar showIcon="true" [(ngModel)]="dateDebut" placeholder="Date de début"></p-calendar>
+      </div>
+      <div>
+        <p-calendar showIcon="true" [(ngModel)]="dateFin" placeholder="Date de fin"></p-calendar>
+      </div>
+      <div>
+        <p-button icon="far fa-search" (click)="getReportTimesheet(dateDebut, dateFin)" iconPos="right" label="Rechercher"></p-button>
+      </div>
+    </div>
+    <div style="margin-top: 20px">
+      <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+        <tr>
+          <th>Nombre d'employé présents</th>
+          <th>Nombre d'employé absents</th>
+          <th>Date du rapport</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{countPresent}}</td>
+          <td>{{countAbsent}}</td>
+          <td>{{date | date: 'dd-MMM-yyyy'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size: medium; font-weight: bold" fxLayout="row" fxLayoutGap="10px">
+      <span><i class="far fa-users"></i></span>
+      <span>RAPPORT DE PRESENCE PAR EMPLOYE</span>
+    </div>
+    <hr>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <div>
+        <ng-select
+          placeholder="Selectionnez l'employé"
+          style="width: 200px"
+          [(ngModel)]="employe"
+          [items]="employe$ | async">
+        </ng-select>
+      </div>
+      <div>
+        <p-calendar showIcon="true" [(ngModel)]="start2" placeholder="Date de début"></p-calendar>
+      </div>
+      <div>
+        <p-calendar showIcon="true" [(ngModel)]="end2" placeholder="Date de fin"></p-calendar>
+      </div>
+      <div>
+          <p-button icon="far fa-search"
+                    iconPos="right"
+                    (click)="getReportCountEmploye(employe, start2, end2)"
+                    label="Rechercher"></p-button>
+      </div>
+    </div>
+    <div style="margin-top: 20px">
+      <table class="table table-bordered table-sm">
+        <thead class="thead-dark">
+        <tr>
+          <th>Employé</th>
+          <th>Nombre d'absence</th>
+          <th>Nombre de présence</th>
+          <th>Date du rapport</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>{{employe}}</td>
+          <td>{{countEmployeAbsence}}</td>
+          <td>{{countEmployePresence}}</td>
+          <td>{{date | date: 'dd-MMM-yyyy'}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size: medium; font-weight: bold; text-transform: uppercase" fxLayout="row" fxLayoutGap="10px">
+      <span><i class="far fa-users"></i></span>
+      <span>rapport détaillé de présence par employé</span>
+    </div>
+    <hr>
+    <div fxLayout="row" fxLayoutGap="20px">
+      <div>
+        <ng-select
+          placeholder="Selectionnez l'employé"
+          style="width: 200px"
+          [(ngModel)]="employ"
+          [items]="employe$ | async">
+        </ng-select>
+      </div>
+      <div>
+        <p-calendar showIcon="true" [(ngModel)]="start3" placeholder="Date de début"></p-calendar>
+      </div>
+      <div>
+        <p-calendar showIcon="true" [(ngModel)]="end3" placeholder="Date de fin"></p-calendar>
+      </div>
+      <div>
+        <p-button icon="far fa-search"
+                  (click)="getSingleRapport(employe, start3, end3)"
+                  iconPos="right" label="Rechercher"></p-button>
+      </div>
+    </div>
+    <div style="margin-top: 20px">
+      <p-table [value]="timesheet" [resizableColumns]="true" [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn>Employé</th>
+            <th pResizableColumn>Heure d'arrivée</th>
+            <th pResizableColumn>Heure de départ</th>
+            <th pResizableColumn>date</th>
+            <th pResizableColumn>Status</th>
+            <th pResizableColumn>Date du rapport</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rapport>
+          <tr>
+            <td ui-resizable-column>{{rapport.employe}}</td>
+            <td ui-resizable-column>{{rapport.heureDebut | date: 'HH:mm'}}</td>
+            <td ui-resizable-column>{{rapport.heureFin | date: 'HH:mm'}}</td>
+            <td ui-resizable-column>{{rapport.date | date: 'dd-MMM-yyyy'}}</td>
+            <td ui-resizable-column>
+              <span *ngIf="rapport.status" class="badge badge-pill badge-primary" >Présent</span>
+              <span *ngIf="!rapport.status" class="badge badge-pill badge-success">Absent</span>
+            </td>
+            <td>{{date | date: 'dd-MMM-yyyy'}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-tabPanel>
+</p-tabView>

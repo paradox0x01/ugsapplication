@@ -1,0 +1,65 @@
+<div class="main">
+  <div fxlayout="row" >
+    <p style="text-transform: capitalize; font-weight: bold; font-size: medium">
+      <span><i class="far fa-users"></i></span>
+      <span style="margin-left: 10px">LISTE DU PERSONNEL</span>
+    </p>
+  </div>
+  <hr>
+  <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+    <div class="row mb-2">
+      <div class="col-6">
+        <div class="d-flex">
+          <div class="ui-inputgroup">
+            <button pButton type="button" icon="far fa-search" class="ui-button-warning"></button>
+            <input type="text"  pInputText placeholder="Rechercher..." pTooltip="Rechercher un employé "
+                   (input)="dt.filterGlobal($event.target.value, 'contains')">
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="d-flex flex-row-reverse">
+          <p-button [routerLink]="['/employe/create']" icon ="far fa-user-plus" label="Ajouter un employé"></p-button>
+        </div>
+      </div>
+    </div>
+  <p-card>
+    <div class="ui-grid">
+      <p-table #dt [value]="Employes$ | async" [resizableColumns]="true" [paginator]="true" [rows]="10" [globalFilterFields]="['nom_prenoms','poste', 'zone', 'finContrat']">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn>EMPLOYE</th>
+            <th pResizableColumn>POSTE</th>
+            <th pResizableColumn>ZONE</th>
+            <th pResizableColumn>FIN DE CONTRAT</th>
+            <th pResizableColumn>ACTIONS</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employe>
+          <tr>
+            <td class="ui-resizable-column">{{employe.nom_prenoms}}</td>
+            <td class="ui-resizable-column">{{employe.poste}}</td>
+            <td class="ui-resizable-column">{{employe.zone}}</td>
+            <td class="ui-resizable-column">{{employe.finContrat | date: 'fullDate'}}</td>
+            <td class="ui-resizable-column">
+              <div class="d-flex flex-row">
+                <button pButton type="button" class="ui-button-info" icon="far fa-eye" [routerLink]="['/employe', employe._id]"></button>
+                <div class="d-flex flex-row mx-1">
+                  <button pButton type="button" class="ui-button-warning" icon="far fa-edit" [routerLink]="['/employe', employe._id, 'edit']"></button>
+                </div>
+                <button nz-popconfirm
+                        nzPopconfirmTitle="Voulez vraiment supprimer?"
+                        nzPopconfirmPlacement="bottom"
+                        (nzOnConfirm)="confirm(employe._id)"
+                        (nzOnCancel)="cancel()" class="btn btn-sm btn-danger">
+                  <span><i class="far fa-trash"></i></span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </p-card>
+  </div>
+</div>

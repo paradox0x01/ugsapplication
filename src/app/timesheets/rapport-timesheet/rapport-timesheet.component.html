@@ -1,0 +1,63 @@
+<p-panel>
+        <p-header> <span><i class="far fa-users"></i></span> RAPPORT DE PRESENCES</p-header>
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+                <div class="row mb-2">
+                  <div class="col-6">
+                    <div>
+                      <div class="d-flex">
+                        <div class="ui-inputgroup">
+                          <button pButton type="button" icon="far fa-search" class="ui-button-warning"></button>
+                          <label>
+                            <input type="text" pInputText placeholder="Rechercher..."
+                                   pTooltip="Rechercher un employé " (input)="dt.filterGlobal($event.target.value, 'contains')">
+                          </label>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+            <div class="ui-grid">
+              <p-table #dt [value]="timesheet$ | async" [resizableColumns]="true" [paginator]="true" [rows]="10" [globalFilterFields]="['employe','date']">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pResizableColumn>EMPLOYE</th>
+                    <th pResizableColumn>HEURE D'ARRIVEE</th>
+                    <th pResizableColumn>HEURE DE DEPART</th>
+                    <th pResizableColumn>DATE</th>
+                    <th pResizableColumn>STATUS</th>
+                    <th pResizableColumn>ACTIONS</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-timesheet>
+                  <tr>
+                    <td class="ui-resizable-column">{{timesheet.employe}}</td>
+                    <td class="ui-resizable-column">{{timesheet.heureDebut| date: 'HH:mm'}}</td>
+                    <td class="ui-resizable-column">{{timesheet.heureFin| date: 'HH:mm'}}</td>
+                    <td class="ui-resizable-column">{{timesheet.date | date: 'fullDate'}}</td>
+                    <td class="ui-resizable-column">
+                      <span *ngIf="timesheet.status" class="badge badge-pill badge-primary" >Présent</span>
+                      <span *ngIf="!timesheet.status" class="badge badge-pill badge-success">Absent</span>
+                    </td>
+                    <td class="ui-resizable-column">
+                      <div class="d-flex flex-row">
+                        <button class="btn btn-success btn-sm"><span><i class="far fa-eye"></i></span></button>
+                        <div class="d-flex flex-row mx-1">
+                          <button [routerLink]="['/timesheet', timesheet._id, 'edit']" class="btn btn-primary btn-sm"><span><i class="far fa-edit"></i></span></button>
+                        </div>
+                        <button nz-popconfirm
+                                nzPopconfirmTitle="Voulez vraiment supprimer?"
+                                nzPopconfirmPlacement="bottom"
+                                (nzOnConfirm)="confirm(timesheet._id)"
+                                (nzOnCancel)="cancel()" class="btn btn-sm btn-danger">
+                          <span><i class="far fa-trash"></i></span>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+        </div>
+        
+    </p-panel>

@@ -1,0 +1,92 @@
+.navbar-nav{
+    text-align: justify;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+.navbar{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.div2{
+  margin-left: auto;
+}
+
+#maindiv{
+  display: flex;
+}
+  .navbar-nav > li > a {
+    text-decoration: none;
+    display: block;
+    padding: 1em;
+    color: white;
+  }
+
+.navbar-nav > li > a:hover {
+  background: darken(deepskyblue, 10%);
+}
+  .navbar-nav li{
+    display: inline-block;
+  }
+  
+  /* .navbar-nav > li > a:hover
+  {
+    color: white;
+  } */
+
+  .dropdown-menu{
+    font-size: 12px;
+  }
+
+  @media (min-width: 992px) {
+    .animate {
+      animation-duration: 0.3s;
+      -webkit-animation-duration: 0.3s;
+      animation-fill-mode: both;
+      -webkit-animation-fill-mode: both;
+    }
+  }
+  
+  @keyframes slideIn {
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+    100% {
+      transform:translateY(0rem);
+      opacity: 1;
+    }
+    0% {
+      transform: translateY(1rem);
+      opacity: 0;
+    }
+  }
+  
+  @-webkit-keyframes slideIn {
+    0% {
+      -webkit-transform: transform;
+      -webkit-opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateY(0);
+      -webkit-opacity: 1;
+    }
+    0% {
+      -webkit-transform: translateY(1rem);
+      -webkit-opacity: 0;
+    }
+  }
+  
+  .slideIn {
+    -webkit-animation-name: slideIn;
+    animation-name: slideIn;
+  }
+
+.main{
+    background-color: #ECECEC;
+    height: 100vh;
+    overflow: auto;
+    padding: 70px 30px;
+}

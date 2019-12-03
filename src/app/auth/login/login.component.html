@@ -1,0 +1,31 @@
+<div class="main">
+    <div class="card">
+      <div class="card-header" style="background-color: #007ad9; color: white">
+        <span>BIENVENUE A UGS, VEUILLEZ VOUS CONNECTER</span>
+      </div>
+      <div class="card-body">
+        <form nz-form [formGroup]="loginForm" class="login-form">
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your username!">
+              <nz-input-group nzPrefixIcon="user">
+                <input type="text" formControlName="username" nz-input placeholder="Nom d'utilisateur" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Please input your Password!">
+              <nz-input-group nzPrefixIcon="lock">
+                <input type="password" formControlName="password" nz-input placeholder="Mot de passe" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control>
+              <button nz-button (click)="login()" class="login-form-button" [nzType]="'primary'">Connexion</button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </div>
+  </div>
+  </div>
+

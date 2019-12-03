@@ -1,0 +1,249 @@
+<div class="main">
+  <form [formGroup]="employeForm" (ngSubmit)="onSave()">
+    <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+      <p-footer>
+        <button type="button" pButton icon="pi pi-times" label="Non" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+      </p-footer>
+    </p-confirmDialog>
+    <p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
+    <p-panel >
+      <p-header> <span><i class="fal fa-user-plus"></i></span> MODIFIER UN EMPLOYE</p-header>
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <div class="ui-grid">
+          <div class="ui-grid-6">
+            <p> <span><i class="far fa-user-check"></i></span> <span style="text-transform: uppercase;"> Informations personnel</span></p>
+          </div>
+
+          <div class="ui-grid">
+            <hr>
+          </div>
+        </div>
+        <!-- Nom et prénoms -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-user"></i></span>  Nom & Prénoms *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText formControlName="nom_prenoms"
+                   pTooltip="Entrez le nom et prénoms de l'employé"  />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Champ obligatoire"
+                       *ngIf="!employeForm.controls['nom_prenoms'].valid
+                && (employeForm.controls['nom_prenoms'].dirty ||
+                 employeForm.controls['nom_prenoms'].touched)">
+            </p-message>
+          </div>
+        </div>
+
+        <!-- Civilité -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-male"></i></span>
+            Civilité *:
+          </div>
+          <div class="ui-grid-col-4">
+            <ng-select [items]="civilite" formControlName="civilite" pTooltip="Selectionnez la civilité"></ng-select>
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Champ obligatoire"
+                       *ngIf="!employeForm.controls['civilite'].valid
+                && (employeForm.controls['civilite'].dirty ||
+                 employeForm.controls['civilite'].touched)">
+            </p-message>
+          </div>
+        </div>
+
+        <!-- Résidence -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-home"></i></span>
+            Résidence *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="text" formControlName="residence"  pTooltip="Entrez le lieu d'habitation de l'employé" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Champ obligatoire"
+                       *ngIf="!employeForm.controls['residence'].valid
+                && (employeForm.controls['residence'].dirty ||
+                 employeForm.controls['residence'].touched)">
+            </p-message>
+          </div>
+        </div>
+
+        <!-- Téléphone -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-phone"></i></span>
+            Téléphone *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="text" formControlName="telephone"  pTooltip="Entrez le numéro de l'employé" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Champ obligatoire"
+                       *ngIf="!employeForm.controls['telephone'].valid
+                && (employeForm.controls['telephone'].dirty ||
+                 employeForm.controls['telephone'].touched)">
+            </p-message>
+          </div>
+        </div>
+
+        <!-- Contact d'urgence -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-phone-volume"></i></span>
+            Contact d'urgence *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="text" formControlName="contactUrgence"  pTooltip="Entrez un contact d'urgence à joindre" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Champ obligatoire"
+                       *ngIf="!employeForm.controls['contactUrgence'].valid
+                && (employeForm.controls['contactUrgence'].dirty ||
+                 employeForm.controls['contactUrgence'].touched)">
+            </p-message>
+          </div>
+        </div>
+
+        <!-- INFORMATION PROFESSIONNEL -->
+        <!-- Information pro -->
+        <br>
+        <div class="ui-grid">
+          <div class="ui-grid-6">
+            <p> <span><i class="far fa-user-check"></i></span> <span style="text-transform: uppercase;"> Informations professionnel</span></p>
+          </div>
+
+          <div class="ui-grid">
+            <hr>
+          </div>
+        </div>
+        <!-- Poste -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-user-tie"></i></span>
+            Poste *:
+          </div>
+          <div class="ui-grid-col-4">
+            <ng-select [items]="poste$ | async" formControlName="poste">
+            </ng-select>
+          </div>
+        </div>
+
+        <!-- Matricule -->
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-file-user    "></i></span>
+            Matricule *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="text" formControlName="matricule"  pTooltip="Entrez le matricule de l'employé" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Champ obligatoire"
+                       *ngIf="!employeForm.controls['matricule'].valid
+                && (employeForm.controls['matricule'].dirty ||
+                 employeForm.controls['matricule'].touched)">
+            </p-message>
+          </div>
+        </div>
+
+        <!-- Responsable -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-user-tie"></i></span>
+            Responsable *:
+          </div>
+          <div class="ui-grid-col-4">
+            <ng-select [items]="responsable$ | async "
+                       formControlName="responsable"></ng-select>
+          </div>
+        </div>
+
+        <!-- Zone -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-user-shield"></i></span>
+            Zone *:
+          </div>
+          <div class="ui-grid-col-4">
+            <ng-select [items]="zone$ | async" formControlName="zone"></ng-select>
+          </div>
+          <div class="ui-grid-col-4">
+          </div>
+        </div>
+
+        <!-- Type de contrat -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-money-check"></i></span>
+            Type de contrat *:
+          </div>
+          <div class="ui-grid-col-4">
+            <input pInputText type="text" formControlName="contrat"  pTooltip="Entrez le type de contrat signé" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Champ obligatoire"
+                       *ngIf="!employeForm.controls['contrat'].valid
+                && (employeForm.controls['contrat'].dirty ||
+                 employeForm.controls['contrat'].touched)">
+            </p-message>
+          </div>
+        </div>
+
+        <!-- Début de contrat -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-handshake    "></i></span>
+            Debut de contrat *:
+          </div>
+          <div class="ui-grid-col-4">
+            <p-calendar showButtonBar="true" formControlName="debutContrat" [locale]="fr" hourFormat="24" showIcon="true" pTooltip="Selectionnez la date de debut de contrat" ></p-calendar>
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Champ obligatoire"
+                       *ngIf="!employeForm.controls['debutContrat'].valid
+                    && (employeForm.controls['debutContrat'].dirty ||
+                     employeForm.controls['debutContrat'].touched)">
+            </p-message>
+          </div>
+        </div>
+
+        <!-- Fin de contrat -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            <span><i class="far fa-file-signature    "></i></span>
+            Fin de contrat *:
+          </div>
+          <div class="ui-grid-col-4">
+            <p-calendar showButtonBar="true" formControlName="finContrat" [locale]="fr" hourFormat="24" showIcon="true" pTooltip="Selectionnez la date de fin de contrat"></p-calendar>
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="Champ obligatoire"
+                       *ngIf="!employeForm.controls['finContrat'].valid
+                && (employeForm.controls['finContrat'].dirty ||
+                 employeForm.controls['finContrat'].touched)">
+            </p-message>
+          </div>
+        </div>
+
+        <!-- Enregistrer et annuler -->
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2 p-offset-2">
+            <button pButton type="button" label="Enregistrer" icon="fad fa-save" (click)="Update()" [disabled]="!employeForm.valid" class="ui-button-raised" ></button>
+          </div>
+          <div class="ui-grid-col-2">
+            <button pButton type="button" label="Annuler" icon="fad fa-chevron-left" class="ui-button-raised ui-button-warning" (click)="cancel()"></button>
+          </div>
+        </div>
+
+      </div>
+
+    </p-panel>
+  </form>
+
+</div>

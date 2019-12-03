@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3d9138ee-955f-47c5-b701-e630bd8b1765" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+        <option value="$PROJECT_DIR$/.idea/dictionaries/LIAM_X.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1UFcWRVPvveiT0i8UeniA1gDIFG" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="js.last.introduce.type" value="LET" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3d9138ee-955f-47c5-b701-e630bd8b1765" name="Default Changelist" comment="" />
+      <created>1572195573027</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572195573027</updated>
+      <workItem from="1572195577055" duration="197000" />
+      <workItem from="1572195917425" duration="964000" />
+      <workItem from="1572253336008" duration="22978000" />
+      <workItem from="1572304882794" duration="599000" />
+      <workItem from="1572334551047" duration="23440000" />
+      <workItem from="1572394582783" duration="4536000" />
+      <workItem from="1572426057961" duration="418000" />
+      <workItem from="1572432703573" duration="12410000" />
+      <workItem from="1572528355345" duration="908000" />
+      <workItem from="1572851734150" duration="2771000" />
+      <workItem from="1572860781942" duration="51000" />
+      <workItem from="1573002597635" duration="4935000" />
+      <workItem from="1573026328812" duration="21130000" />
+      <workItem from="1573115990552" duration="57000" />
+      <workItem from="1574031589150" duration="10231000" />
+      <workItem from="1574064726379" duration="20448000" />
+      <workItem from="1574114040395" duration="2528000" />
+      <workItem from="1574149734983" duration="19407000" />
+      <workItem from="1574194730235" duration="7048000" />
+      <workItem from="1574236790559" duration="5996000" />
+      <workItem from="1574324946918" duration="17081000" />
+      <workItem from="1574369414433" duration="12668000" />
+      <workItem from="1574408601546" duration="5820000" />
+      <workItem from="1574423508605" duration="749000" />
+      <workItem from="1574432327046" duration="5987000" />
+      <workItem from="1574442967638" duration="4228000" />
+      <workItem from="1574467787771" duration="687000" />
+      <workItem from="1574955818284" duration="2140000" />
+      <workItem from="1575277764586" duration="5144000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="468" y="121" key="FileChooserDialogImpl" timestamp="1574960696221">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="468" y="121" key="FileChooserDialogImpl/0.0.1366.768/1366.0.1600.900@0.0.1366.768" timestamp="1574960696221" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/core/employe.service.ts</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

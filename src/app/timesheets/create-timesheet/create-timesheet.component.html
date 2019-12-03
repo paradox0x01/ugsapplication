@@ -1,0 +1,122 @@
+<form [formGroup]="timesheetForm">
+        <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+                <p-footer>
+                    <button type="button" pButton icon="pi pi-times" label="Non" (click)="cd.reject()"></button>
+                    <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+                </p-footer>
+            </p-confirmDialog>
+            <p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
+        <p-panel >
+            <p-header> <span><i class="fal fa-user-plus"></i></span> FEUILLE DE PRESENCE</p-header>
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    <span><i class="far fa-user-tie    "></i></span>
+                    Employé *:
+                </div>
+                <div class="ui-grid-col-4">
+                  <ng-select
+                    placeholder="Selectionnez l'employé"
+                    bindLabel="nom_prenoms"
+                    bindValue="_id"
+                    formControlName="employe"
+                    [items]="employe$ | async ">
+                  </ng-select>
+                </div>
+                <div class="ui-grid-col-4">  
+                    <p-message severity="error" text="Champ obligatoire"  
+                    *ngIf="!timesheetForm.controls['employe'].valid 
+                    && (timesheetForm.controls['employe'].dirty ||
+                     timesheetForm.controls['employe'].touched)">
+                    </p-message>
+                </div>
+            </div>
+
+            <!-- Date -->
+            <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        <span><i class="far fa-file-signature    "></i></span>
+                        Date *:
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <p-calendar showButtonBar="true" formControlName="date"
+                        [locale]="fr" hourFormat="24" showIcon="true" 
+                        pTooltip="Selectionnez la date de fin de contrat"></p-calendar>
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <p-message severity="error" text="Champ obligatoire" 
+                        *ngIf="!timesheetForm.controls['date'].valid 
+                        && (timesheetForm.controls['date'].dirty ||
+                         timesheetForm.controls['date'].touched)">
+                        </p-message>
+                    </div>
+            </div>
+            <!-- Heure d'arrivé -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                   <span><i class="far fa-handshake"></i></span>
+                    Heure d'arrivée *:
+                </div>
+                <div class="ui-grid-col-4">
+                        <p-calendar  timeOnly="true" 
+                        [locale]="fr" formControlName="heureDebut"
+                        hourFormat="24" showIcon="true" 
+                        pTooltip="Selectionnez la date de debut de contrat" ></p-calendar>
+                </div>
+            </div>
+            <!-- Heure de départ -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    <span><i class="far fa-file-signature"></i></span>
+                    Heure de départ *:
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-calendar timeOnly="true" 
+                    formControlName="heureFin"
+                    [locale]="fr" hourFormat="24" showIcon="true"
+                     pTooltip="Selectionnez la date de fin de contrat"></p-calendar>
+                </div>
+            </div>
+
+            <!-- Confirmation de presence -->
+            <div class="ui-grid-row">
+                    <div class="ui-grid-col-2">
+                        <span><i class="far fa-file-signature"></i></span>
+                        Status (Absent/ Présent) *:
+                    </div>
+                    <div class="ui-grid-col-4">
+                            <p-toggleButton onLabel="Présent" offLabel="Absent" 
+                                onIcon="far fa-check" offIcon="far fa-times" iconPos="right" formControlName="status"></p-toggleButton>                </div>
+                    <div class="ui-grid-col-4">
+                        <p-message severity="error" text="Champ obligatoire" 
+                        *ngIf="!timesheetForm.controls['status'].valid 
+                        && (timesheetForm.controls['status'].dirty ||
+                         timesheetForm.controls['status'].touched)">
+                        </p-message>
+                    </div>
+                </div>
+
+            <!-- Raison -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2">
+                    <span><i class="far fa-file-signature"></i></span>
+                    Remarques :
+                </div>
+                <div class="ui-grid-col-4">
+                    <textarea pInputTextarea formControlName="remarque" autoResize="autoResize"></textarea>                   
+                </div>
+            </div>
+
+            
+            <!-- Enregistrer et annuler -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-2 p-offset-2">
+                    <button pButton type="button" icon="fad fa-save" label="Enregistrer" (click)="onSave()" class="ui-button-raised"></button>
+                </div>
+                <div class="ui-grid-col-2">
+                    <button pButton type="button" icon="fad fa-chevron-left" label="Annuler" class="ui-button-raised ui-button-warning" (click)="cancel()"></button>
+                </div>
+            </div>
+        </div>
+        </p-panel>
+    </form>   

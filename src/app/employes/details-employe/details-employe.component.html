@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-body" *ngIf="Employe">
+    <p-panel>
+      <p-header>
+        <span><i class="far fa-user"></i></span> INFORMATION DE L'EMPLOYE</p-header>
+      <div class="card">
+        <div class="card-body">
+          <nz-descriptions nzTitle="INFORMATIONS PERSONNEL">
+            <nz-descriptions-item nzTitle="Noms & Prénoms">{{Employe.nom_prenoms}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Civilité">{{Employe.civilite}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Résidence">{{Employe.residence}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Numéro de Téléphone">{{Employe.telephone}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Contact d'urgence">{{Employe.contactUrgence}}</nz-descriptions-item>
+          </nz-descriptions>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 20px">
+        <div class="card-body">
+          <nz-descriptions  nzTitle="INFORMATIONS PROFESSIONEL">
+            <nz-descriptions-item nzTitle="Poste">{{Employe.poste}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Matricule">{{Employe.matricule}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Responsable">{{Employe.responsable}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Zone">{{Employe.zone}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Type du Contrat">{{Employe.contrat}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Début de contrat">{{Employe.debutContrat| date:'fullDate'}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Fin du Contrat">{{Employe.finContrat| date:'fullDate'}}</nz-descriptions-item>
+
+          </nz-descriptions>
+        </div>
+      </div>
+      <div style="margin-top: 20px">
+        <button class="btn btn-warning" [routerLink]="['/employes']">
+          <span><i class="fad fa-chevron-left"></i></span>
+          Retour</button>
+      </div>
+    </p-panel>
+  </div>
+</div>

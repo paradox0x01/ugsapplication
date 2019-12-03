@@ -1,0 +1,119 @@
+<form [formGroup]="permissionForm">
+    <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle">
+        <p-footer>
+            <button type="button" pButton icon="pi pi-times" label="Non" (click)="cd.reject()"></button>
+            <button type="button" pButton icon="pi pi-check" label="Oui" (click)="cd.accept()"></button>
+        </p-footer>
+    </p-confirmDialog>
+    <p-toast [style]="{marginTop: '80px'}" position="top-right"></p-toast>
+    <p-panel >
+        <p-header> <span><i class="fal fa-user-plus"></i></span> AJOUTER UNE PERMISSION</p-header>
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+
+        <!-- EMPLOYE -->
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+                <span><i class="far fa-user-tie"></i></span>
+                Employé *:
+            </div>
+            <div class="ui-grid-col-4">
+                <ng-select [items]="Employes$ | async" formControlName="employe"
+                           pTooltip="Selectionnez un employe">
+                </ng-select>
+            </div>
+            <div class="ui-grid-col-4">
+                <p-message severity="error" text="Champ obligatoire" 
+                *ngIf="!permissionForm.controls['employe'].valid 
+                && (permissionForm.controls['employe'].dirty ||
+                 permissionForm.controls['employe'].touched)">
+                </p-message>
+            </div>
+        </div>
+        <!-- Type de permission -->
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+                <span><i class="far fa-home"></i></span>
+                Type de permission *:
+            </div>
+            <div class="ui-grid-col-4">
+                <input pInputText type="text" formControlName="typePermission"  pTooltip="Entrez le type de la permission à accorder" />
+            </div>
+            <div class="ui-grid-col-4">
+                <p-message severity="error" text="Champ obligatoire" 
+                *ngIf="!permissionForm.controls['typePermission'].valid 
+                && (permissionForm.controls['typePermission'].dirty ||
+                 permissionForm.controls['typePermission'].touched)">
+                </p-message>
+            </div>
+        </div>
+
+        <!-- Début de permission -->
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+               <span><i class="far fa-handshake"></i></span>
+                Date de début *:
+            </div>
+            <div class="ui-grid-col-4">
+                <p-calendar showButtonBar="true" formControlName="dateDebut" [locale]="fr" hourFormat="24" showIcon="true" pTooltip="Selectionnez la date de debut de contrat" ></p-calendar>
+            </div>
+            <div class="ui-grid-col-4">
+                <p-message severity="error" text="Champ obligatoire" 
+                *ngIf="!permissionForm.controls['dateDebut'].valid 
+                && (permissionForm.controls['dateDebut'].dirty ||
+                 permissionForm.controls['dateDebut'].touched)">
+                </p-message>
+            </div>
+        </div>
+
+        <!-- Fin de permission -->
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+                <span><i class="far fa-file-signature"></i></span>
+                Date de fin *:
+            </div>
+            <div class="ui-grid-col-4">
+                <p-calendar showButtonBar="true" formControlName="dateFin" [locale]="fr" hourFormat="24" showIcon="true" pTooltip="Selectionnez la date de fin de contrat"></p-calendar>
+            </div>
+            <div class="ui-grid-col-4">
+                <p-message severity="error" text="Champ obligatoire" 
+                *ngIf="!permissionForm.controls['dateFin'].valid 
+                && (permissionForm.controls['dateFin'].dirty ||
+                 permissionForm.controls['dateFin'].touched)">
+                </p-message>
+            </div>
+        </div>
+
+        <!-- Raison -->
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2">
+                <span><i class="far fa-file-signature"></i></span>
+                Raison *:
+            </div>
+            <div class="ui-grid-col-6">
+              <label>
+                <textarea pInputTextarea formControlName="raison"></textarea>
+              </label>
+            </div>
+            <div class="ui-grid-col-4">
+                <p-message severity="error" text="Champ obligatoire" 
+                *ngIf="!permissionForm.controls['raison'].valid 
+                && (permissionForm.controls['raison'].dirty ||
+                 permissionForm.controls['raison'].touched)">
+                </p-message>
+            </div>
+        </div>
+        
+
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2 p-offset-2">
+                <button pButton type="button" icon="fad fa-save" label="Enregistrer" class="ui-button-raised" (click)="onSave()"></button>
+            </div>
+            <div class="ui-grid-col-2">
+                <button pButton type="button" icon="fad fa-chevron-left" label="Annuler" class="ui-button-raised ui-button-warning" (click)="cancel()"></button>
+            </div>
+        </div>
+        
+    </div> 
+    </p-panel>
+
+</form>   

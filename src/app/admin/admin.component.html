@@ -1,0 +1,237 @@
+<div class="main">
+  <p style="text-transform: capitalize; font-weight: bold; font-size: large">
+    <span><i class="far fa-users"></i></span>
+    <span style="margin-left: 10px">ADMINISTRATION</span>
+  </p>
+  <hr>
+  <div fxLayout="column" fxLayoutGap="20px">
+    <div>
+      <div fxlayout="row" >
+        <p style="text-transform: capitalize; font-weight: bold; font-size: medium">
+          <span><i class="fal fa-map-marked-alt"></i></span>
+          <span style="margin-left: 10px">GESTION DE ZONES</span>
+        </p>
+      </div>
+      <!-- Gestion de zones -->
+        <div fxLayout="row" fxLayoutGap="10px">
+          <p-card>
+            <div fxLayout="row" fxLayoutGap="10px" [formGroup]="zonesForm" >
+              <div fxflex="33">
+                <div fxLayout="row" fxLayoutGap="10px">
+                  <div fxFlex="20">
+                    <span style="font-size: small; font-weight: bold">ZONE: </span>
+                  </div>
+                  <div fxFlex>
+                    <input  type="text" class="form-control" formControlName="nomZone" />
+                  </div>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10px" style="margin-top: 10px">
+                  <div fxFlex="33">
+                    <button class="btn btn-primary btn-sm"  (click)="addZone()">Enregistrer</button>
+                  </div>
+                </div>
+              </div>
+              <div fxFlex>
+                <p-table [value]="zones" [paginator]="true" [rows]="5">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>ZONES</th>
+                      <th>ACTIONS</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-zone>
+                    <tr>
+                      <td>{{zone.nomZone}}</td>
+                      <td >
+                        <button pButton type="button" (click)="delZone(zone._id)" class="ui-button-warning" icon="far fa-trash"></button>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </p-card>
+        </div>
+    </div>
+    <!--GESTION DE POSTE-->
+    <div>
+      <div fxlayout="row" >
+        <p style="text-transform: capitalize; font-weight: bold; font-size: medium">
+          <span><i class="fal fa-map-marked-alt"></i></span>
+          <span style="margin-left: 10px">GESTION DE POSTES</span>
+        </p>
+      </div>
+      <p-card>
+        <div fxLayout="row" fxLayoutGap="10px" [formGroup]="posteForm">
+          <div fxflex="33">
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="20">
+                <span style="font-size: small; font-weight: bold">POSTE: </span>
+              </div>
+              <div fxFlex>
+                <input  type="text" class="form-control" formControlName="nomPoste" />
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px" style="margin-top: 10px">
+              <div fxFlex="33">
+                <button class="btn btn-primary btn-sm" (click)="addPoste()" >Enregistrer</button>
+              </div>
+            </div>
+          </div>
+          <div fxFlex>
+            <p-table [value]="postes" [resizableColumns]="true" [paginator]="true" [rows]="5">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>POSTES</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-poste>
+                <tr>
+                  <td>{{poste.nomPoste}}</td>
+                  <td>
+                    <button pButton type="button" (click)="delPoste(poste._id)" class="ui-button-warning" icon="far fa-trash"></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </p-card>
+    </div>
+    <div>
+      <div fxlayout="row" >
+        <p style="text-transform: capitalize; font-weight: bold; font-size: medium">
+          <span><i class="fal fa-map-marked-alt"></i></span>
+          <span style="margin-left: 10px">GESTION DE RESPONSABLES</span>
+        </p>
+      </div>
+      <p-card>
+        <div fxLayout="row" fxLayoutGap="10px">
+          <div fxLayout="column" fxLayoutGap="10px" fxFlex="33" [formGroup]="responsableForm">
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="33">
+                <span style="font-size: small; font-weight: bold">RESPONSABLE: </span>
+              </div>
+              <div fxFlex>
+                <ng-select [items]="selectEmploye$ | async "
+                           formControlName="responsable"
+                >
+                </ng-select>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="33">
+                <span style="font-size: small; font-weight: bold">ZONE DE GESTION: </span>
+              </div>
+              <div fxFlex>
+                <ng-select
+                        [items]="selectZone$ | async"
+                        formControlName="zone"
+                ></ng-select>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="33">
+                <button class="btn btn-primary btn-sm">Enregistrer</button>
+              </div>
+            </div>
+          </div>
+          <div fxFlex>
+            <p-table [value]="responsables" [resizableColumns]="true" [paginator]="true" [rows]="5">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>RESPONSABLE</th>
+                  <th>ZONE DE GESTION</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-resps>
+                <tr>
+                  <td>{{resps.responsable | json}}</td>
+                  <td>{{resps.zone | json}}</td>
+                  <td>
+                    <button pButton type="button" (click)="delResponsable(resps._id)" class="ui-button-warning" icon="far fa-trash"></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </p-card>
+    </div>
+    <!--Gestion d'utilisateur-->
+    <div>
+      <div fxlayout="row" >
+        <p style="text-transform: capitalize; font-weight: bold; font-size: medium">
+          <span><i class="fal fa-users"></i></span>
+          <span style="margin-left: 10px">GESTION D'UTILISATEUR'</span>
+        </p>
+      </div>
+      <p-card>
+        <div fxLayout="row" fxLayoutGap="10px">
+          <!--DIV FORMS-->
+          <div fxLayout="column" fxLayoutGap="10px" fxFlex="33">
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="33">
+                <span style="font-size: small; font-weight: bold">EMPLOYE: </span>
+              </div>
+              <div fxFlex>
+                <input  type="text" class="form-control"/>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="33">
+                <span style="font-size: small; font-weight: bold">NOM D'UTILISATEUR: </span>
+              </div>
+              <div fxFlex>
+                <input  type="text" class="form-control"/>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="33">
+                <span style="font-size: small; font-weight: bold">MOT DE PASSE: </span>
+              </div>
+              <div fxFlex>
+                <input  type="text" class="form-control"/>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="33">
+                <span style="font-size: small; font-weight: bold">ROLE: </span>
+              </div>
+              <div fxFlex>
+                <input  type="text" class="form-control"/>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutGap="10px">
+              <div fxFlex="33">
+                <button class="btn btn-primary btn-sm">Enregistrer</button>
+              </div>
+            </div>
+          </div>
+          <div fxFlex>
+            <p-table [value]="view" [resizableColumns]="true" [paginator]="true" [rows]="5">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>EMPLOYE</th>
+                  <th>NOM D'UTILISATEUR</th>
+                  <th>ACTIONS</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-user>
+                <tr>
+                  <td>{{user.username}}</td>
+                  <td>{{user.nom_prenoms}}</td>
+                  <td>
+                    <button pButton type="button" (click)="delUsers(user._id)" label="supprimer" class="ui-button-danger" icon="far fa-trash"></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>
